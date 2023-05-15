@@ -30,7 +30,6 @@ public class TheProject extends Applet implements KeyListener {
 	int W=screenSize.width;
 	int H=screenSize.height;
 
-    private int dy = 0;
     private int groundLevel = 300;
 
     private boolean isJumping = false;
@@ -47,10 +46,8 @@ public class TheProject extends Applet implements KeyListener {
 	Color myYellowD = Color.decode("#F47E36");
 
 
-    /**-------------Initial Position---------------------**/
-	int start =50;
+    /**<-------------Initial Position--------------------->**/
 	int	ground=H-350;
-
 	int X=500, Y=H-350;
 
 	int dir=0;
@@ -59,10 +56,11 @@ public class TheProject extends Applet implements KeyListener {
 		addKeyListener(this);
 	}
 
-	/**------------Control---------------**/
+	/**<------------------Control----------------------->**/
     public void keyPressed(KeyEvent e) {
     // Handle key press event
     int keyCode = e.getKeyCode();
+
     switch (keyCode) {
         case KeyEvent.VK_UP:
         	isJumping=true;
@@ -94,7 +92,6 @@ public class TheProject extends Applet implements KeyListener {
                     Y=H-350;
                     repaint();
                 }
-
             }
         });
         animationThread.start();
@@ -128,44 +125,46 @@ public class TheProject extends Applet implements KeyListener {
     public void keyTyped(KeyEvent e) {}
 
 
-    Shape[] shape = new Shape[]{
-			new RoundRectangle2D.Float(100,200,400,800,500,500),
-			new RoundRectangle2D.Float(8*100,200,400,800,500,500),
-			new RoundRectangle2D.Float(16*100,200,400,800,500,500)
-		};
-
-
 	public void paint(Graphics g) {
 
 		Graphics2D g2 =(Graphics2D) g;
 
-		g2.setPaint(darkBlue);
+	/**Backround---------------------------------------->**/
+		g2.setPaint(lightBlue);
 		Rectangle2D rect=new Rectangle2D.Double(0,0,W,H);
 		g2.fill(rect);
 
+		background(g2);
+
 	/**Backround Elemnts---------------------------------------->**/
 		g2.setPaint(lightBlue);
-		Ellipse2D circle = new Ellipse2D.Float(W/2-50,200,100,100);
+		Ellipse2D circle = new Ellipse2D.Float(700,200,100,100);
 		g2.fill(circle);
 
-		RoundRectangle2D cR =new RoundRectangle2D.Float(W-240,80,270,70,60,60);
+		RoundRectangle2D cR =new RoundRectangle2D.Float(W-550,20,600,70,60,60);
 		g2.fill(cR);
 		RoundRectangle2D cL =new RoundRectangle2D.Float(-30,30,400,60,50,50);
 		g2.fill(cL);
 
 
+/**Ground---------------------------------------->**/
 
-		g2.setPaint(darkGround);
-		Rectangle2D rect1=new Rectangle2D.Double(0,H-200,W,100);
-		g2.fill(rect1);
 
-		g2.setPaint(lightGround);
-		Rectangle2D rect2=new Rectangle2D.Double(0,ground,W,150);
-		g2.fill(rect2);
+	wave(0,H-350,W,H-130,g);
 
-		drawCharacter(g2);
+	wave(100,300,400,450,g);
+    wave(800,450,1000,600,g);
+    wave2(1300,200,1600,300,g);
+
+	 drawCharacter(g2);
+
+
+
+
+
 
 	}
+
 
 	void drawCharacter(Graphics2D gg){
 
@@ -208,6 +207,109 @@ public class TheProject extends Applet implements KeyListener {
 		Rectangle2D rect3=new Rectangle2D.Double(X-5,Y-135,155,40);
 		gg.fill(rect3);
 	}
+
+
+
+
+	public void background(Graphics2D ggg){
+
+    int y=H/3;
+
+	ggg.setPaint(darkBlue);
+    Rectangle2D rr = new Rectangle2D.Float(0,0,W,y);
+    ggg.fill(rr);
+
+	ggg.setPaint(lightBlue);
+
+    Rectangle2D c1 =new Rectangle2D.Float(900,300,300,400);
+    ggg.fill(c1);
+    ggg.fillArc(900 , 150, 300, 300, 0, 180);
+
+    Rectangle2D c2 =new Rectangle2D.Float(300,300,300,400);
+    ggg.fill(c2);
+    ggg.fillArc(300 , 150, 300, 300, 0, 180);
+
+    Rectangle2D c3 =new Rectangle2D.Float(1500,300,300,400);
+    ggg.fill(c3);
+    ggg.fillArc(1500 , 150, 300, 300, 0, 180);
+
+    ggg.setPaint(darkBlue);
+
+    ggg.fillArc(0 ,200, 300, 300, 0, -180);
+
+    ggg.fillArc(600,200, 300, 300, 0, -180);
+
+    ggg.fillArc(1200 ,200, 300, 300, 0, -180);
+
+    ggg.fillArc(1800 ,200, 300, 300, 0, -180);
+
+}
+
+
+
+
+
+
+public void wave(int xs,int ys,int xe,int ye,Graphics t){
+
+	Graphics2D gg = (Graphics2D) t;
+
+    int ymid=(ye-ys)/2;
+
+	gg.setPaint(myGreen);
+   	Rectangle2D rr = new Rectangle2D.Float(xs,ys,xe-xs,ye-ys);
+    gg.fill(rr);
+
+    gg.setPaint(lightGround);
+    Rectangle2D ty = new Rectangle2D.Float(xs,(ys+ymid)-20,xe-xs,(ye-(ymid+ys)));
+    gg.fill(ty);
+
+    //ground with hight 40
+     gg.setPaint(darkGround);
+    Rectangle2D aa = new Rectangle2D.Float(xs,ye-40,xe-xs,40);
+    gg.fill(aa);
+
+    //down wave
+    QuadCurve2D QC = new QuadCurve2D.Float();
+   gg.setPaint(myGreen);
+    for(int i=0;i+xs<xe;i+=40){
+     	   QC.setCurve((xs+i),(ys+ymid-20),(i+xs+10),(ys+ymid),(i+xs+20),(ys+ymid-20));
+           gg.fill(QC);
+    }
+     gg.setPaint(lightGround);
+     for(int j=20;j+xs<xe-10;j+=40){
+     	   QC.setCurve(xs+j,ys+ymid -20, j+xs+10,(ys+ymid-40), j+xs+20, ys+ymid-20);
+           gg.fill(QC);
+     }
+}
+
+public void wave2(int xs,int ys,int xe,int ye,Graphics t){
+
+	Graphics2D gg = (Graphics2D) t;
+
+    int ymid=(ye-ys)/2;
+
+	gg.setPaint(myGreen);
+   	Rectangle2D rr = new Rectangle2D.Float(xs,ys,xe-xs,ye-ys-20);
+    gg.fill(rr);
+
+    gg.setPaint(lightGround);
+    Rectangle2D ty = new Rectangle2D.Float(xs,(ys+ymid)-20,xe-xs,(ye-(ymid+ys)));
+    gg.fill(ty);
+
+    //down wave
+    QuadCurve2D QC = new QuadCurve2D.Float();
+   gg.setPaint(myGreen);
+    for(int i=0;i+xs<xe;i+=40){
+     	   QC.setCurve((xs+i),(ys+ymid-20),(i+xs+10),(ys+ymid),(i+xs+20),(ys+ymid-20));
+           gg.fill(QC);
+    }
+     gg.setPaint(lightGround);
+     for(int j=20;j+xs<xe-10;j+=40){
+     	   QC.setCurve(xs+j,ys+ymid -20, j+xs+10,(ys+ymid-40), j+xs+20, ys+ymid-20);
+           gg.fill(QC);
+     }
+}
 
 
 }

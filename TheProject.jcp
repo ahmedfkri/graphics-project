@@ -19,7 +19,7 @@
 			<applet_ref/>
 			<debugger_ref/>
 			<param/>
-			<run/>
+			<run>classes\TheProject.htm</run>
 			<verify>true</verify>
 		</runtime>
 	</runtimes>
