@@ -21,11 +21,6 @@ import java.awt.event.KeyListener;
 public class TheProject extends Applet implements KeyListener {
 
 
-
-
-//	private BufferedImage offscreenImage;
-//    private Graphics offscreenGraphics;
-
     Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 	int W=screenSize.width;
 	int H=screenSize.height;
@@ -54,6 +49,7 @@ public class TheProject extends Applet implements KeyListener {
 
 	public void init() {
 		addKeyListener(this);
+		this.setSize(new Dimension(1500,2000));
 	}
 
 	/**<------------------Control----------------------->**/
@@ -68,22 +64,22 @@ public class TheProject extends Applet implements KeyListener {
         Thread animationThread = new Thread(() -> {
             while (true) {
                 if (isJumping) {
-                    // jump for 100 frames
+                    // jump
                     for (int i = 0; i < 20; i++) {
                         Y -= 5;
                         repaint();
                         try {
-                            Thread.sleep(20);
+                            Thread.sleep(30);
                         } catch (InterruptedException ee) {
                             ee.printStackTrace();
                         }
                     }
-                    // fall for 100 frames
+                    // fall
                     for (int j = 0; j < 20; j++) {
                         Y += 5;
                         repaint();
                         try {
-                            Thread.sleep(20);
+                            Thread.sleep(30);
                         } catch (InterruptedException eee) {
                             eee.printStackTrace();
                         }
@@ -108,13 +104,12 @@ public class TheProject extends Applet implements KeyListener {
             break;
            //Handle Right Key
         case KeyEvent.VK_RIGHT:
-            if(X<W-150){
+            if(X<1500-150){
         		 X+=50;
             repaint();
         	}
 
         default:
-
             break;
     }
 }
@@ -146,9 +141,7 @@ public class TheProject extends Applet implements KeyListener {
 		RoundRectangle2D cL =new RoundRectangle2D.Float(-30,30,400,60,50,50);
 		g2.fill(cL);
 
-
 /**Ground---------------------------------------->**/
-
 
 	wave(0,H-350,W,H-130,g);
 
@@ -157,11 +150,6 @@ public class TheProject extends Applet implements KeyListener {
     wave2(1300,200,1600,300,g);
 
 	 drawCharacter(g2);
-
-
-
-
-
 
 	}
 
