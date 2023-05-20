@@ -10,16 +10,12 @@
 import java.awt.*;
 import java.awt.geom.*;
 import java.applet.*;
-
 import java.awt.image.BufferedImage;
-
 import java.awt.geom.AffineTransform;
-
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class TheProject extends Applet implements KeyListener {
-
 
     Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 	int W=screenSize.width;
@@ -39,8 +35,6 @@ public class TheProject extends Applet implements KeyListener {
 	Color myPurple = Color.decode("#3B0457");
 	Color myYellow = Color.decode("#FCB117");
 	Color myYellowD = Color.decode("#F47E36");
-
-
     /**<-------------Initial Position--------------------->**/
 	int	ground=H-350;
 	int X=500, Y=H-350;
@@ -59,6 +53,7 @@ public class TheProject extends Applet implements KeyListener {
 
     switch (keyCode) {
         case KeyEvent.VK_UP:
+
         	isJumping=true;
 
         Thread animationThread = new Thread(() -> {
