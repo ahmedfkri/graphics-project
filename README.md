@@ -57,6 +57,6 @@ The Java2D Mini Game project is licensed under the [MIT License](LICENSE). Pleas
 - [Java2D Documentation](https://docs.oracle.com/javase/tutorial/2d/index.html) - Official documentation for Java2D.
 - [OpenGameArt.org](https://opengameart.org/) - Resource for free game assets.
 
-![Alt Text](https://giphy.com/gifs/p9FSackftOXv9rpB2n/fullscreen)
+![Alt Text](https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExYTUxOTNiNDNiOGZkMWJhY2IwMmUwZGJkYTg0YzdlYjEwOGI3ZDA4MiZlcD12MV9pbnRlcm5hbF9naWZzX2dpZklkJmN0PWc/p9FSackftOXv9rpB2n/giphy.gif)
 
 
